@@ -1,2 +1,0 @@
-# WebTicTacToe
-Tictactoe basically
