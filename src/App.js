@@ -30,14 +30,35 @@ function App() {
   const [playerScore, setPlayerScore] = useState(0)
   const [aiScore, setAiScore] = useState(0)
 
+  const detectWin = (player) => {
+    const moves = ['rock', 'pape', 'cutt']
+    const ai = moves[Math.floor(Math.random() * moves.length)]
+
+    if (player === ai) {
+      alert('TIE!')
+    } else if (player === 'rock' && ai === 'cutt') {
+      alert(`WIN rock vs ${ai}`)
+      setPlayerScore(playerScore + 1)
+    } else if (player === 'pape' && ai === 'rock') {
+      alert(`WIN pape vs ${ai}`)
+      setPlayerScore(playerScore + 1)
+    } else if (player === 'scissors' && ai === 'pape') {
+      alert(`WIN cutt vs ${ai}`)
+      setPlayerScore(playerScore + 1)
+    } else {
+      alert(`LOSE ${player} vs ${ai}`)
+      setAiScore(aiScore + 1)
+    }
+  }
+
   return (
     <div class="App">
       <Scores player={playerScore} ai={aiScore} />
 
       <ul class="space-x-32 flex justify-center">
-        <Move move='Rock'/>
-        <Move move='Pape'/>
-        <Move move='Cutt'/>
+        <Move click={() => detectWin('rock')} move='Rock'/>
+        <Move click={() => detectWin('pape')} move='Pape'/>
+        <Move click={() => detectWin('cutt')} move='Cutt'/>
       </ul>
     </div>
   )
